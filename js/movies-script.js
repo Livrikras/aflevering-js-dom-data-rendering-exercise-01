@@ -137,3 +137,47 @@ function displayMovies(movieList) {
 }
 
 displayMovies(movies);
+
+// Henter de HTML elementer, vi skal arbejde med og gemmer dem i nogle variabler
+const selectedCategory = document.querySelector("#category-select");
+
+const searchInput = document.querySelector("#gsearch");
+
+// søger efter et tag (den tager den første formular på index.html)
+const form = document.querySelector("form");
+
+// Filtrering------------------------------------------------------------------
+function filterMovies() {
+  const selectedValue = selectedCategory.value; // Henter den valgte værdi fra dropdown-menuen
+
+  const searchTerm = searchInput.value.toLowerCase().trim(); // Henter søgetermen og konverterer den til små bogstaver og fjerner mellemrum
+
+  // Vi starter med alle udstillinger fra listen (array-exhibitions)
+  let filteredMovies = movies;
+
+  // alle betyder alle perioder
+  // Vi filtrere kun hvis brugeren har valgt noget andet end "alle"
+  // ! betyder not, så hvis selectedValue ikke er "alle", så er det en af filtreringerne.
+  if (selectedValue != "alle") {
+    filteredMovies = filteredMovies.filter((item) => {
+      return item.genre === selectedValue; // Hvis item.genre er lig med selectedValue, så bliver det inkluderet i det nye array
+    });
+  }
+  if (searchTerm !== "") {
+    filteredMovies = filteredMovies.filter((item) => {
+      return item.titel.toLowerCase().includes(searchTerm);
+    });
+  }
+  displayMovies(filteredMovies);
+}
+
+// Lave en listener på exhibitionContainer, som lytter efter ændringer i dropdown-menuen (change) og kalder på filterExhibitions-funktionen
+selectedCategory.addEventListener("change", filterMovies);
+
+// Lave en listener på searchInput, som lytter efter ændringer i input-feltet (input) og kalder på filterExhibitions-funktionen
+searchInput.addEventListener("input", filterMovies);
+// fjerner backend:
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); // Forhindrer formularen i at blive sendt, så siden ikke genindlæses
+  filterMovies(); // Kalder på filterExhibitions-funktionen, når formularen bliver indsendt
+});
