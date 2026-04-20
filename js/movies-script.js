@@ -3,7 +3,7 @@
 const movies = [
   {
     id: 1,
-    title: "Inception",
+    titel: "Inception",
     genre: "science-fiction",
     year: 2010,
     duration: 2.28,
@@ -12,7 +12,7 @@ const movies = [
   },
   {
     id: 2,
-    title: "The Dark Knight",
+    titel: "The Dark Knight",
     genre: "action",
     year: 2008,
     duration: 2.32,
