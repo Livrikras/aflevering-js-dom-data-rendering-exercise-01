@@ -96,10 +96,28 @@ const movies = [
 const moviesContainer = document.querySelector("#movies-container");
 
 function displayMovies(movieList) {
-  moviesContainer.innerHTML = "";
+  // moviesContainer.innerHTML = "";
 
-  movies.forEach((item) => {
-    moviesContainer.innerHTML += `
+  // movies.forEach((item) => {
+  //   moviesContainer.innerHTML += `
+  //       <div class="movie-card">
+  //           <article>
+  //               <h2>${item.titel}</h2>
+  //               <p>Genre: ${item.genre}</p>
+  //               <p>År: ${item.year}</p>
+  //               <p>Varighed: ${item.duration} timer</p>
+  //           </article>
+  //           <figure>
+  //               <a href="${item.url}" target="_blank" rel="noopener noreferrer"><img src="${item.img}" alt="${item.titel}"></a>
+  //               <figcaption>${item.titel}</figcaption>
+  //           </figure>
+  //       </div>
+  //       `;
+  // });
+
+  const html = movieList
+    .map((item) => {
+      return `
         <div class="movie-card">
             <article>
                 <h2>${item.titel}</h2>
@@ -113,7 +131,9 @@ function displayMovies(movieList) {
             </figure>
         </div>
         `;
-  });
+    })
+    .join("");
+  moviesContainer.innerHTML = html;
 }
 
 displayMovies(movies);
